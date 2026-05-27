@@ -22,17 +22,37 @@ To write and execute an Assembly Language Program for sorting data in Ascending 
 
 ## Program (Ascending order)
 
-```asm
+ORG 0000H
 
+MOV R1,30H        ; Outer loop count = N
+DEC R1
 
+LOOP1: MOV R0,#40H
+       MOV R6,30H
+       DEC R6
 
+LOOP:  MOV A,@R0
+       INC R0
+       MOV B,@R0
 
-```
+   CJNE A,B,NEXT
+
+NEXT:  JC DOWN        ; If A < B, no swap
+
+ MOV @R0,A      ; Swap if A > B
+ DEC R0
+ MOV @R0,B
+ INC R0
+
+DOWN:  DJNZ R6,LOOP
+       DJNZ R1,LOOP1
+
+END
+
 ## OUTPUT(Ascending order)
 
+<img width="1599" height="1021" alt="image" src="https://github.com/user-attachments/assets/588c7cdc-9383-422b-bb1f-38dac85afc74" />
 
-
----
 
 ## Algorithm(Descending order)
 1. Initialize the register **R7** with count.  
@@ -46,19 +66,53 @@ To write and execute an Assembly Language Program for sorting data in Ascending 
    - If **No**, repeat the process from Step 2.  
    - If **Yes**, stop the program.  
 ---
+
 ## Program (Descending order)
+ORG 0000H
 
-```asm
+MOV R1,30H     ; Outer loop count = N
+
+DEC R1
+
+LOOP1: MOV R0,#40H
+
+  MOV R6,30H
+       
+   DEC R6
+       
+
+LOOP:  MOV A,@R0
+
+   INC R0
+       
+   MOV B,@R0
+       
+   CJNE A,B,NEXT
+       
+NEXT:  JNC DOWN
+
+   MOV @R0,A
+       
+   DEC R0
+       
+   MOV @R0,B
+       
+   INC R0
+       
+
+DOWN:  DJNZ R6,LOOP
+
+   DJNZ R1,LOOP1   ; Outer loop ends correctly
 
 
+END
 
-
-```
 ## OUTPUT(Descending order)
 
+<img width="1600" height="911" alt="image" src="https://github.com/user-attachments/assets/7cf846f8-eae1-471f-855a-62071e044d16" />
 
 
----
+
 ## RESULT:
 Thus the sorting of given data was done using 8051 keil software.
 
