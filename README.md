@@ -23,13 +23,39 @@ To write and execute an Assembly Language Program for sorting data in Ascending 
 ## Program (Ascending order)
 
 ```asm
+ORG 0000H
 
+MOV R1,30H        ; Outer loop count = N
+DEC R1
+
+LOOP1: MOV R0,#40H
+       MOV R6,30H
+       DEC R6
+
+LOOP:  MOV A,@R0
+       INC R0
+       MOV B,@R0
+
+       CJNE A,B,NEXT
+
+NEXT:  JC DOWN        ; If A < B, no swap
+
+       MOV @R0,A      ; Swap if A > B
+       DEC R0
+       MOV @R0,B
+       INC R0
+
+DOWN:  DJNZ R6,LOOP
+       DJNZ R1,LOOP1
+
+END
 
 
 
 ```
 ## OUTPUT(Ascending order)
 
+<img width="960" height="500" alt="WhatsApp Image 2026-05-21 at 10 39 58 AM" src="https://github.com/user-attachments/assets/47f9e9e2-77d8-466d-9652-d5e17bde6230" />
 
 
 ---
@@ -49,12 +75,35 @@ To write and execute an Assembly Language Program for sorting data in Ascending 
 ## Program (Descending order)
 
 ```asm
+ORG 0000H
+MOV R1,30H     ; Outer loop count = N
+DEC R1
 
+LOOP1: MOV R0,#40H
+       MOV R6,30H
+       DEC R6
+
+LOOP:  MOV A,@R0
+       INC R0
+       MOV B,@R0
+       CJNE A,B,NEXT
+NEXT:  JNC DOWN
+
+       MOV @R0,A
+       DEC R0
+       MOV @R0,B
+       INC R0
+
+DOWN:  DJNZ R6,LOOP
+       DJNZ R1,LOOP1   ; Outer loop ends correctly
+
+END
 
 
 
 ```
 ## OUTPUT(Descending order)
+<img width="971" height="556" alt="image" src="https://github.com/user-attachments/assets/0a54466c-e9b6-4846-9c74-c31adb9178e5" />
 
 
 
